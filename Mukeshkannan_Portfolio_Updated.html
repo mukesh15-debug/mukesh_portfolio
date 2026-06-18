@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mukeshkannan M | Cloud & DevOps Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#161c24;
+    --ink-soft:#5b6573;
+    --paper:#eef0ed;
+    --panel:#ffffff;
+    --line:#dde1dc;
+    --accent:#0d7d6d;
+    --accent-soft:#e3f0ec;
+    --signal:#c97a2c;
+    --dark:#10181a;
+    --dark-line:rgba(255,255,255,0.1);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.01em;}
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 2rem;}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(238,240,237,0.85);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1080px;margin:0 auto;padding:1.1rem 2rem;
+    display:flex;justify-content:space-between;align-items:center;
+  }
+  .logo{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.95rem;font-weight:500;letter-spacing:0.02em;
+  }
+  .logo span{color:var(--accent);}
+  nav ul{display:flex;list-style:none;gap:2rem;align-items:center;}
+  nav ul a{
+    text-decoration:none;color:var(--ink-soft);font-size:0.92rem;
+    transition:color .25s;
+  }
+  nav ul a:hover{color:var(--accent);}
+  .status-pill{
+    display:flex;align-items:center;gap:0.5rem;
+    font-family:'IBM Plex Mono',monospace;font-size:0.78rem;color:var(--ink-soft);
+    border:1px solid var(--line);border-radius:100px;padding:0.35rem 0.8rem;
+    background:var(--panel);
+  }
+  .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+  .dot.pulse{animation:pulse 2.2s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(13,125,109,0.45);}
+    70%{box-shadow:0 0 0 6px rgba(13,125,109,0);}
+    100%{box-shadow:0 0 0 0 rgba(13,125,109,0);}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width:1080px;margin:0 auto;padding:4.5rem 2rem 5rem;
+    display:grid;grid-template-columns:1.1fr 1fr;gap:3rem;align-items:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;font-size:0.82rem;color:var(--accent);
+    letter-spacing:0.06em;margin-bottom:1rem;display:block;
+  }
+  .hero h1{
+    font-size:2.9rem;font-weight:700;line-height:1.1;margin-bottom:1.2rem;
+  }
+  .hero h1 em{font-style:normal;color:var(--accent);}
+  .hero p.lede{
+    color:var(--ink-soft);font-size:1.08rem;max-width:520px;margin-bottom:2rem;
+  }
+  .cta-row{display:flex;gap:0.9rem;flex-wrap:wrap;margin-bottom:2.5rem;}
+  .btn{
+    display:inline-flex;align-items:center;gap:0.5rem;
+    background:var(--ink);color:#fff;
+    padding:0.78rem 1.5rem;border-radius:6px;font-weight:600;font-size:0.95rem;
+    text-decoration:none;transition:transform .2s,background .2s;
+  }
+  .btn:hover{background:var(--accent);transform:translateY(-1px);}
+  .btn.ghost{
+    background:transparent;color:var(--ink);border:1px solid var(--line);
+  }
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent);background:transparent;transform:translateY(-1px);}
+  .stat-row{display:flex;gap:2.2rem;flex-wrap:wrap;}
+  .stat{font-family:'IBM Plex Mono',monospace;}
+  .stat .num{display:block;font-size:1.3rem;font-weight:600;color:var(--ink);}
+  .stat .lbl{font-size:0.78rem;color:var(--ink-soft);}
+
+  /* ---------- Diagram ---------- */
+  .diagram-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:1.4rem;box-shadow:0 18px 40px -24px rgba(15,25,30,0.25);
+  }
+  .diagram-card svg{width:100%;height:auto;display:block;}
+  .node-box{fill:var(--panel);stroke:var(--line);stroke-width:1.4;}
+  .node-box.active{stroke:var(--accent);}
+  .node-label{font-family:'IBM Plex Mono',monospace;font-size:10.5px;fill:var(--ink);}
+  .node-sub{font-family:'IBM Plex Mono',monospace;font-size:8.5px;fill:var(--ink-soft);}
+  .flow-line{stroke:var(--line);stroke-width:1.4;fill:none;}
+  .flow-line.live{stroke:var(--accent);stroke-dasharray:4 4;animation:dash 1.6s linear infinite;}
+  @keyframes dash{to{stroke-dashoffset:-16;}}
+  .pulse-dot{fill:var(--signal);}
+  .pulse-dot.anim{animation:pulse2 1.8s infinite;}
+  @keyframes pulse2{
+    0%,100%{opacity:1;} 50%{opacity:0.35;}
+  }
+
+  /* ---------- Section shell ---------- */
+  section.block{max-width:1080px;margin:0 auto;padding:4.5rem 2rem;}
+  .kicker{
+    display:flex;align-items:center;gap:0.6rem;margin-bottom:2.4rem;
+  }
+  .kicker .node-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);}
+  .kicker h2{font-size:1.7rem;font-weight:600;}
+  .alt-bg{background:#e6e9e4;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+
+  .summary-text{color:var(--ink-soft);font-size:1.08rem;max-width:780px;}
+  .summary-text strong{color:var(--ink);}
+
+  /* ---------- Skills ---------- */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.3rem;}
+  .skills-card{
+    background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--line);
+    border-radius:8px;padding:1.5rem;transition:border-color .25s,transform .25s;
+  }
+  .skills-card:hover{border-top-color:var(--accent);transform:translateY(-3px);}
+  .skills-card h3{font-size:1.02rem;margin-bottom:0.9rem;color:var(--ink);}
+  .skills-card .eyebrow-mini{
+    font-family:'IBM Plex Mono',monospace;font-size:0.7rem;color:var(--ink-soft);
+    letter-spacing:0.05em;display:block;margin-bottom:0.4rem;
+  }
+  .tags{display:flex;flex-wrap:wrap;gap:0.5rem;}
+  .tag{
+    background:var(--accent-soft);color:#0b5b4f;
+    padding:0.3rem 0.7rem;border-radius:5px;font-size:0.8rem;font-weight:500;
+  }
+
+  /* ---------- Experience ---------- */
+  .log{display:flex;flex-direction:column;gap:1.2rem;}
+  .log-item{
+    display:grid;grid-template-columns:170px 1fr;gap:1.5rem;
+    background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:1.6rem 1.8rem;position:relative;overflow:hidden;
+  }
+  .log-item::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--line);
+  }
+  .log-item.active::before{background:var(--accent);}
+  .log-meta{display:flex;flex-direction:column;gap:0.6rem;}
+  .log-meta .range{font-family:'IBM Plex Mono',monospace;font-size:0.8rem;color:var(--ink-soft);}
+  .status-tag{
+    font-family:'IBM Plex Mono',monospace;font-size:0.68rem;font-weight:500;
+    padding:0.25rem 0.55rem;border-radius:4px;width:fit-content;letter-spacing:0.04em;
+  }
+  .status-tag.live{background:var(--accent-soft);color:#0b5b4f;}
+  .status-tag.done{background:#e7e7e2;color:var(--ink-soft);}
+  .log-body .job-title{font-size:1.18rem;font-weight:700;margin-bottom:0.15rem;}
+  .log-body .company{color:var(--ink-soft);font-size:0.92rem;margin-bottom:1rem;}
+  .log-body ul{padding-left:1.1rem;color:var(--ink-soft);}
+  .log-body li{margin-bottom:0.5rem;font-size:0.95rem;}
+
+  /* ---------- Certifications ---------- */
+  .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.1rem;}
+  .cert-card{
+    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);
+    border-radius:8px;padding:1.2rem 1.4rem;
+  }
+  .cert-card .cert-issuer{
+    font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:var(--accent);
+    letter-spacing:0.05em;display:block;margin-bottom:0.3rem;
+  }
+  .cert-card .cert-name{font-weight:600;font-size:0.98rem;}
+
+  /* ---------- Contact ---------- */
+  .contact-band{
+    background:var(--dark);color:#f4f6f4;position:relative;overflow:hidden;
+  }
+  .contact-band::before{
+    content:'';position:absolute;inset:0;
+    background-image:linear-gradient(var(--dark-line) 1px, transparent 1px),
+                      linear-gradient(90deg, var(--dark-line) 1px, transparent 1px);
+    background-size:48px 48px;opacity:0.5;
+  }
+  .contact-inner{position:relative;text-align:center;padding:5rem 2rem;max-width:760px;margin:0 auto;}
+  .contact-inner .eyebrow{color:#7fd9c6;}
+  .contact-inner h2{font-size:2.2rem;margin-bottom:1rem;}
+  .contact-inner p{color:#aab3ad;font-size:1.05rem;margin-bottom:2.2rem;}
+  .contact-links{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;}
+  .contact-links a{text-decoration:none;}
+  .contact-links .label{
+    display:block;font-family:'IBM Plex Mono',monospace;font-size:0.72rem;color:#7fd9c6;
+    letter-spacing:0.05em;margin-bottom:0.3rem;
+  }
+  .contact-links .value{font-size:1.08rem;font-weight:600;color:#fff;}
+  .contact-links .value:hover{color:#7fd9c6;}
+
+  footer{
+    text-align:center;padding:2.2rem;color:var(--ink-soft);font-size:0.85rem;
+    font-family:'IBM Plex Mono',monospace;background:var(--dark);color:#6b7a76;
+  }
+
+  /* ---------- Reveal ---------- */
+  .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease;}
+  .reveal.in{opacity:1;transform:translateY(0);}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important;transition:none !important;}
+  }
+
+  @media (max-width:860px){
+    .hero{grid-template-columns:1fr;padding-top:3rem;}
+    .hero h1{font-size:2.2rem;}
+    nav ul{display:none;}
+    .log-item{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">MUKESHKANNAN.M <span>/</span></div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certifications">Certifications</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="status-pill"><span class="dot pulse"></span>Open to new roles</div>
+  </nav>
+</header>
+
+<main>
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <span class="eyebrow mono">CLOUD &amp; DEVOPS ENGINEER</span>
+      <h1>Building scalable cloud platforms, Kubernetes infrastructure and intelligent automation solutions.</h1>
+      <p class="lede">
+        Cloud & DevOps Engineer with 2+ years of experience in Azure DevOps, Kubernetes, AKS, CI/CD Automation and Infrastructure as Code. Passionate about building scalable cloud platforms, streamlining software delivery pipelines and leveraging AI-powered operations for enterprise environments.
+      </p>
+      <div class="cta-row">
+        <a href="mailto:mukeshkannanm15@gmail.com" class="btn">Get in touch</a>
+        <a href="#experience" class="btn ghost">See the work</a>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><span class="num">2+ yrs</span><span class="lbl">hands-on experience</span></div>
+        <div class="stat"><span class="num">2</span><span class="lbl">GCP certifications</span></div>
+        <div class="stat"><span class="num">3</span><span class="lbl">clouds: Azure, GCP, AWS</span></div>
+      </div>
+    </div>
+
+    <div class="diagram-card">
+      <svg viewBox="0 0 460 360" xmlns="http://www.w3.org/2000/svg">
+        <!-- internet -->
+        <circle cx="60" cy="40" r="22" class="node-box active"></circle>
+        <text x="60" y="38" text-anchor="middle" class="node-label">WEB</text>
+        <text x="60" y="50" text-anchor="middle" class="node-sub">traffic</text>
+
+        <!-- app gateway -->
+        <rect x="150" y="20" width="150" height="44" rx="6" class="node-box active"></rect>
+        <text x="225" y="40" text-anchor="middle" class="node-label">Application Gateway</text>
+        <text x="225" y="54" text-anchor="middle" class="node-sub">ingress + TLS</text>
+
+        <path class="flow-line live" d="M82,40 H150"></path>
+        <path class="flow-line live" d="M225,64 V100"></path>
+
+        <!-- AKS cluster -->
+        <rect x="60" y="100" width="340" height="200" rx="10" class="node-box"></rect>
+        <text x="80" y="125" class="node-label">AKS Cluster — prod</text>
+        <circle cx="375" cy="120" r="4" class="pulse-dot anim"></circle>
+
+        <!-- pods -->
+        <rect x="90" y="150" width="90" height="64" rx="6" class="node-box active"></rect>
+        <text x="135" y="178" text-anchor="middle" class="node-label">api-svc</text>
+        <text x="135" y="192" text-anchor="middle" class="node-sub">3 pods</text>
+
+        <rect x="195" y="150" width="90" height="64" rx="6" class="node-box"></rect>
+        <text x="240" y="178" text-anchor="middle" class="node-label">worker</text>
+        <text x="240" y="192" text-anchor="middle" class="node-sub">2 pods</text>
+
+        <rect x="300" y="150" width="80" height="64" rx="6" class="node-box active"></rect>
+        <text x="340" y="178" text-anchor="middle" class="node-label">ingress-ctrl</text>
+        <text x="340" y="192" text-anchor="middle" class="node-sub">routing</text>
+
+        <!-- IaC layer -->
+        <rect x="90" y="240" width="290" height="40" rx="6" class="node-box"></rect>
+        <text x="235" y="263" text-anchor="middle" class="node-label">Terraform  — IaC</text>
+
+        <path class="flow-line" d="M135,214 V240"></path>
+        <path class="flow-line" d="M240,214 V240"></path>
+        <path class="flow-line" d="M340,214 V240"></path>
+
+        <!-- pipeline strip -->
+        <rect x="60" y="312" width="340" height="32" rx="6" class="node-box active"></rect>
+        <text x="230" y="332" text-anchor="middle" class="node-label">Azure Pipelines — build · test · deploy</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="block">
+    <div class="kicker"><span class="node-dot"></span><h2>Professional summary</h2></div>
+    <p class="summary-text">
+      I'm a results-driven Cloud &amp; DevOps Engineer with over two years of hands-on experience
+      designing and managing <strong>Azure DevOps platforms</strong>, <strong>CI/CD pipelines</strong>,
+      and <strong>AKS-based Kubernetes infrastructure</strong>. My work centers on Infrastructure as
+      Code with Terraform, DevSecOps integration across the delivery pipeline, and building
+      cloud-native monitoring that catches problems before users do.
+    </p>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="block alt-bg">
+    <div class="kicker"><span class="node-dot"></span><h2>Technical stack</h2></div>
+    <div class="skills-grid">
+      <div class="skills-card">
+        <span class="eyebrow-mini">PIPELINES</span>
+        <h3>CI/CD &amp; DevOps</h3>
+        <div class="tags">
+          <span class="tag">Azure Pipelines (YAML)</span>
+          <span class="tag">Azure Repos &amp; Boards</span>
+          <span class="tag">Git Branching</span>
+        </div>
+      </div>
+      <div class="skills-card">
+        <span class="eyebrow-mini">PLATFORMS</span>
+        <h3>Cloud &amp; Orchestration</h3>
+        <div class="tags">
+          <span class="tag">Azure Kubernetes Service (AKS)</span>
+          <span class="tag">GCP</span>
+          <span class="tag">AWS</span>
+          <span class="tag">App Services / Network Services</span>
+        </div>
+      </div>
+      <div class="skills-card">
+        <span class="eyebrow-mini">PROVISIONING</span>
+        <h3>Infrastructure as Code</h3>
+        <div class="tags">
+          <span class="tag">Terraform</span>
+          <span class="tag">Ansible</span>
+        </div>
+      </div>
+      <div class="skills-card">
+        <span class="eyebrow-mini">SCRIPTING + AI</span>
+        <h3>Automation &amp; AIOps</h3>
+        <div class="tags">
+          <span class="tag">PowerShell / Bash</span>
+          <span class="tag">Python</span>
+          <span class="tag">Azure OpenAI (GPT-4)</span>
+          <span class="tag">AIOps Platforms</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+<section id="projects" class="block">
+<div class="kicker"><span class="node-dot"></span><h2>Featured Projects</h2></div>
+<div class="skills-grid">
+<div class="skills-card"><h3>Azure DevOps CI/CD Platform</h3><p>Built multi-stage YAML pipelines for Dev, UAT and Production environments with automated build, test and deployment workflows, approval gates and rollback capabilities.</p></div>
+<div class="skills-card"><h3>AKS Production Deployment</h3><p>Deployed and managed containerized workloads on Azure Kubernetes Service (AKS), configured Application Gateway Ingress Controller, service discovery and traffic routing.</p></div>
+<div class="skills-card"><h3>AIOps Platform Implementation</h3><p>Integrated Azure OpenAI GPT-4 models into enterprise AIOps platforms for event correlation, anomaly detection and operational intelligence.</p></div>
+<div class="skills-card"><h3>Infrastructure as Code</h3><p>Automated Azure infrastructure provisioning using Terraform with version-controlled deployments.</p></div>
+</div>
+</section>
+
+
+  <!-- Experience -->
+  <section id="experience" class="block">
+    <div class="kicker"><span class="node-dot"></span><h2>Experience</h2></div>
+    <div class="log">
+      <div class="log-item active">
+        <div class="log-meta">
+          <span class="status-tag live">ACTIVE</span>
+          <span class="range">Aug 2025 — Present</span>
+        </div>
+        <div class="log-body">
+          <div class="job-title">Software Engineer / Implementation Engineer</div>
+          <div class="company">LTIMindtree</div>
+          <ul>
+            <li>Designed and implemented end-to-end CI/CD pipelines using multi-stage YAML configurations and approval gates in Azure Pipelines.</li>
+            <li>Configured AKS networking, including Application Gateway and Ingress Controllers, to streamline traffic routing and service discovery.</li>
+            <li>Deployed Azure OpenAI models (GPT-4) and performed fine-tuning tailored for domain-specific AIOps use cases.</li>
+            <li>Managed source code governance and branching strategies using Azure Repos (Git).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="log-item">
+        <div class="log-meta">
+          <span class="status-tag done">COMPLETED</span>
+          <span class="range">Jun 2024 — Jul 2025</span>
+        </div>
+        <div class="log-body">
+          <div class="job-title">AIOps Analyst</div>
+          <div class="company">Empasys Info Solutions — LTIMindtree client project</div>
+          <ul>
+            <li>Contributed to AIOps platform configuration, infrastructure monitoring setup, and event management workflows.</li>
+            <li>Designed an end-to-end global IT architecture incorporating high availability and disaster recovery principles.</li>
+            <li>Used Ansible for configuration management, Git for version control, and PowerShell/Bash scripts for automation.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certifications" class="block alt-bg">
+    <div class="kicker"><span class="node-dot"></span><h2>Certifications &amp; awards</h2></div>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <span class="cert-issuer">GOOGLE CLOUD</span>
+        <div class="cert-name">Professional DevOps Engineer</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-issuer">GOOGLE CLOUD</span>
+        <div class="cert-name">Associate Cloud Engineer</div>
+      </div>
+      <div class="cert-card">
+        <span class="cert-issuer">LTIMINDTREE</span>
+        <div class="cert-name">Best Transformation Award — corporate training excellence</div>
+      </div>
+    </div>
+  </section>
+
+  
+<section id="education" class="block">
+<div class="kicker"><span class="node-dot"></span><h2>Education</h2></div>
+<div class="cert-grid">
+<div class="cert-card">
+<span class="cert-issuer">BACHELOR OF ENGINEERING</span>
+<div class="cert-name">Computer Science & Engineering</div>
+<p style="margin-top:10px;">KIT Kalaignarkarunanidhi Institute of Technology<br>CGPA: 7.46<br>Graduated: 2021</p>
+</div>
+</div>
+</section>
+
+<section class="block alt-bg">
+<div class="kicker"><span class="node-dot"></span><h2>Currently Exploring</h2></div>
+<div class="tags">
+<span class="tag">AI Agents</span>
+<span class="tag">Azure OpenAI</span>
+<span class="tag">Platform Engineering</span>
+<span class="tag">Kubernetes Operators</span>
+<span class="tag">DevSecOps</span>
+<span class="tag">GitOps</span>
+</div>
+</section>
+
+
+  <!-- Contact -->
+  <section id="contact" class="contact-band">
+    <div class="contact-inner">
+      <span class="eyebrow mono">LET'S TALK</span>
+      <h2>Need infrastructure that holds up under load?</h2>
+      <p>Looking for a Cloud &amp; DevOps Engineer for automation, pipeline design, or Kubernetes
+        cluster scaling — let's connect.</p>
+      <div class="contact-links">
+        <a href="mailto:mukeshkannanm15@gmail.com">
+          <span class="label">EMAIL</span>
+          <span class="value">mukeshkannanm15@gmail.com</span>
+        </a>
+        <a href="tel:+919159402902">
+          <span class="label">PHONE</span>
+          <span class="value">+91 91594 02902</span>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>&copy; 2026 Mukeshkannan M. All rights reserved.</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:0.12});
+  document.querySelectorAll('.block, .hero, .contact-inner').forEach(el=>{
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
